@@ -5,3 +5,4 @@
 # Note that the LAST matching pattern will be effective so please more generic paths towards the top
 
 / @mandy-chessell @planetf1
+Dockerfile @planetf1
