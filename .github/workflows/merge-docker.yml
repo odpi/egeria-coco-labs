@@ -7,7 +7,7 @@ name: "Container build"
 
 on:
   push:
-    branches: [master,release-*]
+    branches: [main]
     paths: Dockerfile
   # Also manual if needed - in case of a failed publish
   workflow_dispatch:
@@ -43,9 +43,8 @@ jobs:
         uses: docker/setup-qemu-action@v2
       - name: Set Release version env variable - base it on the last part of what we have in the dockerfile FROM line
         run: |
-          echo "VERSION=$(cat Dockerfile | grep FROM | awk -F':' '{print $2}')
+          echo "VERSION=$(cat Dockerfile | grep FROM | awk -F':' '{print $2}')"
       - name: Build and push(jupyter) to quay.io and docker.io
-        if: ${{ github.repository == 'odpi/egeria' && github.ref == 'refs/heads/master'}}
         uses: docker/build-push-action@v3
         with:
           push: true
