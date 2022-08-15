@@ -5,7 +5,7 @@
 # on some enterprise k8s environments. see https://github.com/odpi/egeria-jupyter-notebooks/issues/9
 
 # TODO: Move to later version
-FROM docker.io/jupyter/base-notebook:2022-05-23
+FROM docker.io/jupyter/minimal-notebook:lab-3.4.5
 
 USER root
 
