@@ -49,5 +49,4 @@ jobs:
         with:
           push: true
           tags: odpi/jupyter:${{ env.VERSION }}, odpi/jupyter:latest, quay.io/odpi/jupyter:${{ env.VERSION }}, quay.io/odpi/jupyter:latest
-          context: ./open-metadata-resources/open-metadata-deployment/docker/jupyter
           platforms: linux/amd64,linux/arm64
