@@ -8,7 +8,6 @@ name: "Container build"
 on:
   push:
     branches: [main]
-    paths: Dockerfile,.github/workflows/merge-docker.yml
   # Also manual if needed - in case of a failed publish
   workflow_dispatch:
 
