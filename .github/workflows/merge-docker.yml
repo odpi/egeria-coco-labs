@@ -45,7 +45,7 @@ jobs:
       # for rebuilds. This should be reset for each revision
       - name: Set Release version env variable - base it on the last part of what we have in the dockerfile FROM line
         run: |
-          echo "VERSION=$(cat Dockerfile | grep FROM | awk -F':' '{print $2}')(cat .tag-append|grep -v '#')" >> $GITHUB_ENV
+          echo "VERSION=$(cat Dockerfile | grep FROM | awk -F':' '{print $2}')$(cat .tag-append|grep -v '#')" >> $GITHUB_ENV
       - name: Build and push(jupyter) to quay.io and docker.io
         uses: docker/build-push-action@v3
         with:
