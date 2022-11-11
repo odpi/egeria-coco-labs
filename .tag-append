@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright Contributors to the Egeria project.
+#
+# Any uncommmented string below is appended to the container tag name
+# This is used to support rebuilds/fixes to our image where the base
+# notebook image remains the same
+-1
+# Do not add any newlines
