@@ -4,7 +4,8 @@
 # This build script corrects some permission issues needed to run
 # on some enterprise k8s environments. see https://github.com/odpi/egeria-jupyter-notebooks/issues/9
 
-# TODO: Move to later version
+# The published image tag is taken from the numerical version of
+# our base image, and appended with the contents of .tag-append (file)
 FROM docker.io/jupyter/minimal-notebook:lab-3.5.0
 
 USER root
