@@ -9,9 +9,12 @@ FROM docker.io/jupyter/minimal-notebook:lab-3.5.0
 
 USER root
 
+# Needed to dynamically add the selected user on startup - see link below
+RUN chmod g+w /etc/passwd
+
 RUN chown -R $NB_UID:$NB_GID $HOME
 
 # https://cloud.redhat.com/blog/jupyter-on-openshift-part-6-running-as-an-assigned-user-id
-RUN chgrp -Rf root /home/$NB_USER && chmod -Rf g+w /home/$NB_USER
+RUN chgrp -Rf root /home/$NB_USER && chmod -Rf g+w /home/$NB_USER && chgrp -Rf root /opt/conda && chmod -Rf g+w /opt/conda
 
 USER 1000

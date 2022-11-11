@@ -1,1 +1,5 @@
 .idea
+# Used to save status when running containers
+.setupComplete
+# Jupyter notebook temp/update files
+**/.ipynb_checkpoints
