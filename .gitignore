@@ -1,6 +1,5 @@
 .idea
 
-
 # DrawIO temporary files
 *.dtmp
 *.bkp
@@ -66,3 +65,6 @@ THIRD_PARTY*.txt
 !gradle/**
 .gradle/
 build/
+
+# Used to save status when running containers
+.setupComplete
