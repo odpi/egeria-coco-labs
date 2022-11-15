@@ -1,1 +1,68 @@
 .idea
+
+
+# DrawIO temporary files
+*.dtmp
+*.bkp
+
+# emacs files
+*#
+*~
+
+# Mac OS
+__MACOSX
+
+# specific Egeria config files
+omag.server.*.config
+omag.server.*.auditlog/**
+*.registrystore
+keystore_*/**
+
+# Conformance Test Suite results for Egeria
+*.testlab.results
+openmetadata_cts_summary.json
+profile-details/*.json
+test-case-details/*.json
+
+# Dynamic data used by egeria
+data/**
+
+# other files
+.DS_Store
+*.swp
+.java-version
+*.graphml
+
+
+# Ignore private maven repo (jenkins)
+.repository
+
+# exclude temporary lock files
+*.lock
+log
+# m2 repo used by linux foundation build
+**/m2repo*/**
+
+# ignore github pages build file and site.
+Gemfile
+
+# vscode editor
+**/.vscode*/**
+**/.factorypath
+**/**.code-workspace
+
+# Jupyter notebook temp/update files
+**/.ipynb_checkpoints
+
+# Java core files
+Snap*.trc
+javacore*.txt
+jitdump*dmp
+
+# License files (generated)
+THIRD_PARTY*.txt
+
+# gradle
+!gradle/**
+.gradle/
+build/
