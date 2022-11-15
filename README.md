@@ -5,9 +5,9 @@
 
 The open metadata labs contain an interactive environment that allow you to
 experiment with different capabilities of Egeria.  As such we often refer to them as
-**Hands-on Labs**.
+**Hands-on Labs**.  They are implemented using the Jupyter Notebooks stored in this repository.
 
-* [Documentation on setup and running](https://egeria-project.org/education/open-metadata-labs/overview/)
+* [Overview of the Labs](https://egeria-project.org/education/open-metadata-labs/overview/)
 
 ----
 License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
