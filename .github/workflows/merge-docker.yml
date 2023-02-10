@@ -47,7 +47,7 @@ jobs:
         run: |
           echo "VERSION=$(cat Dockerfile | grep FROM | awk -F':' '{print $2}')$(cat .tag-append|grep -v '#')" >> $GITHUB_ENV
       - name: Build and push(jupyter) to quay.io and docker.io
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: odpi/jupyter:${{ env.VERSION }}, odpi/jupyter:latest, quay.io/odpi/jupyter:${{ env.VERSION }}, quay.io/odpi/jupyter:latest
