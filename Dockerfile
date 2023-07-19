@@ -6,7 +6,7 @@
 
 # The published image tag is taken from the numerical version of
 # our base image, and appended with the contents of .tag-append (file)
-FROM docker.io/jupyter/minimal-notebook:lab-4.0.0
+FROM docker.io/jupyter/minimal-notebook:lab-4.0.3
 
 USER root
 
