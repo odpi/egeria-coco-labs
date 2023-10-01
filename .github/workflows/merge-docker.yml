@@ -39,7 +39,7 @@ jobs:
       # QEMU is needed for ARM64 build for egeria-configure
       # egeria-configure needs to install utilities
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
       # This action will also use the file .tag-append which might contain an
       # additional value like '-0' to represent an extension to the version,ie
       # for rebuilds. This should be reset for each revision
