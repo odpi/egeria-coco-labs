@@ -12,7 +12,7 @@ The asset management notebooks cover the function to manage a catalog of assets 
 
 
 ----
-* [Return to the Labs Overiew](..)
+* [Return to the Labs Overiew](../..)
 
 
 ----
