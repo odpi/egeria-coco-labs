@@ -1,0 +1,130 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+# Copyright Contributors to the Egeria project
+
+
+# To run
+#   * Ensure Docker is installed and running
+#   * Start Egeria Platform stack using
+#     'docker compose -f ./coco-lab-setyp.yaml up --build'
+#
+# Assumptions:
+#   * The following ports are used:
+#       * 7443, 7444, 7445 are used by the egeria-core, egeria-datalake, and egeria-dev Egeria OMAG Platforms.
+#       * 7888 is used by Jupyter
+#       * 7192 is used by Kafka
+#   * by default, the repository data is stored locally within the container using XTDB as the storage provider.
+#   * by default, strict SSL validation is turned off
+#
+
+services:
+    jupyter-hub:
+        depends_on:
+            egeria-core:
+                condition: service_healthy
+            egeria-datalake:
+                condition: service_healthy
+            egeria-dev:
+                condition: service_healthy
+
+        image: quay.io/jupyter/minimal-notebook
+        container_name: jupyter
+        ports:
+            - 7888:7888
+        environment:
+            JUPYTER_ENABLE_LAB: "yes"
+            JUPYTER_TOKEN: "egeria"
+            JUPYTER_PORT: 7888
+        build:
+            dockerfile: Dockerfile
+
+        volumes:
+            - ../coco-jupyter-labs/:/home/jovyan
+            - ./before-notebook.d:/usr/local/bin/before-notebook.d
+          #  - ./coco-lab-docker-compose:/home/jovyan/scripts
+
+    kafka:
+         image: 'bitnami/kafka:latest'
+         ports:
+             - '7192:7192'
+
+         environment:
+             - KAFKA_CFG_NODE_ID=0
+             - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+             - KAFKA_CFG_PROCESS_ROLES=controller,broker
+             - KAFKA_CFG_LISTENERS=PLAINTEXT://:7192,CONTROLLER://:7193
+             - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+             - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:7193
+             - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+
+    egeria-core:
+        depends_on:
+            - kafka
+        image: 'docker.io/odpi/egeria-platform:stable'
+        ports:
+            - '7443:7443'
+
+        environment:
+            - XTDB_ENABLE_BYTEUTILS_SHA1=True
+            - XTDB_DISABLE_LIBCRYPTO=True
+            - startup.server.list=
+            - server.port=7443
+        healthcheck:
+            test:  curl -k -X GET "https://localhost:7443/open-metadata/platform-services/users/garygeeke/server-platform/origin" || exit 1
+            interval: 20s
+            timeout: 10s
+            retries: 3
+            start_period: 10s
+
+    egeria-datalake:
+        depends_on:
+            - kafka
+
+        image: 'docker.io/odpi/egeria-platform:stable'
+        ports:
+            - '7444:7444'
+
+        environment:
+            - XTDB_ENABLE_BYTEUTILS_SHA1=True
+            - XTDB_DISABLE_LIBCRYPTO=True
+            - startup.server.list=
+            - server.port=7444
+        healthcheck:
+            test: curl -k -X GET "https://localhost:7444/open-metadata/platform-services/users/garygeeke/server-platform/origin" || exit 1
+            interval: 20s
+            timeout: 10s
+            retries: 3
+            start_period: 10s
+
+
+    egeria-dev:
+        depends_on:
+            - kafka
+
+        image: 'docker.io/odpi/egeria-platform:stable'
+        ports:
+            - '7445:7445'
+        environment:
+            - XTDB_ENABLE_BYTEUTILS_SHA1=True
+            - XTDB_DISABLE_LIBCRYPTO=True
+            - startup.server.list=
+            - server.port=7445
+        healthcheck:
+            test: curl -k -X GET "https://localhost:7445/open-metadata/platform-services/users/garygeeke/server-platform/origin" || exit 1
+            interval: 20s
+            timeout: 10s
+            retries: 3
+            start_period: 10s
+
+
+
+#
+# Change external to true and create volumes manually if you wish to persist between runs
+#
+volumes:
+    zookeeper-data:
+        external: false
+    kafka-data:
+        external: false
+    db_home:
+        external: false
