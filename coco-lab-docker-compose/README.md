@@ -19,6 +19,7 @@ environment that includes:
 * Three Egeria OMAG Server Platforms (Core, Datalake, and Development)
 * Kafka
 * Jupyter Server that is used to run the lab exercises
+* Unity Catalog Open Source Server
 
 
 # Getting Started

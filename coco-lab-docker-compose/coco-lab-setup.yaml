@@ -116,6 +116,10 @@ services:
             retries: 3
             start_period: 10s
 
+    unity-catalog:
+        image: 'dwolfson/unitycatalog:first'
+        ports:
+            - '8081:8081'
 
 
 #
