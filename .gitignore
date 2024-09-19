@@ -68,3 +68,7 @@ build/
 
 # Used to save status when running containers
 .setupComplete
+
+coco-jupyter-labs/.*
+coco-jupyter-labs/.*/**
+
